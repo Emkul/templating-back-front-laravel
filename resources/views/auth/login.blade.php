@@ -7,7 +7,7 @@
       <h3>{{ __('Login dulu') }} </h3>
     </div>
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-      <form class="form" method="POST" action="{{ route('login') }}">
+      <form class="form" method="POST" action="login/store">
         @csrf
 
         <div class="card card-login card-hidden mb-3">

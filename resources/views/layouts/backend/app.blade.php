@@ -26,7 +26,11 @@
             @include('layouts.backend.page_templates.auth')
         @endauth
         @guest()
-            @include('layouts.backend.page_templates.guest')
+            @if ( isset($titlePage) == 'Daftar Kategori')
+              @include('layouts.backend.page_templates.white')
+            @else
+              @include('layouts.backend.page_templates.guest')
+            @endif
         @endguest
         @if (auth()->check())
         <div class="fixed-plugin">

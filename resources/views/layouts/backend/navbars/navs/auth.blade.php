@@ -53,6 +53,10 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+            @if (auth()->check())
+              <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ auth()->user()->name }}</a>
+            @endif
+
             <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
             <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
             <div class="dropdown-divider"></div>

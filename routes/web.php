@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\loginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\kategoriController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,14 +25,14 @@ Route::get('/', function () {
 
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -66,12 +71,35 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('upgrade');
 });
 
+
 Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'App\Http\Controllers\UserController', ['except' => ['show']]);
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
+
+// route login
+
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login/store', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
+// route register
+
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+// route user
+
+Route::resource('user', UserController::class);
+
+// route kategori
+
+Route::resource('kategori', kategoriController::class);
+Route::post('kategori/status/{kategori}', [kategoriController::class, 'status'])->name('kategori.status');
+
+
+
 
 
 
