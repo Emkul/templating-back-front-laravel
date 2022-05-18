@@ -78,8 +78,8 @@
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- End Google Tag Manager (noscript) -->
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            <input type="hidden" name="_token" value="NKN81BvuQSzEbJlULUVrTDRewUlcAIJhPbOwli18"> </form>
-        <div class="wrapper ">
+            @csrf
+        </form>
             <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
                 <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
@@ -118,6 +118,12 @@
                                         <a class="nav-link" href="{{ route('user.index') }}">
                                             <span class="sidebar-mini"> UM </span>
                                             <span class="sidebar-normal"> {{ __('User Management') }} </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item{{ $activePage == 'KategoriTable' ? ' active' : '' }}">
+                                        <a class="nav-link" href="{{ route('kategori.index') }}">
+                                            <span class="sidebar-mini" > KT </span>
+                                            <p>{{ __('Kategori List') }}</p>
                                         </a>
                                     </li>
                                 </ul>
