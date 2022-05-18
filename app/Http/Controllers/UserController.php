@@ -78,9 +78,11 @@ class UserController extends Controller
 
         if ($pwlama->password != $data['password']) {
             $data['password'] = Hash::make($request->password);
+            $data['created_at'] = now();
             $data['updated_at'] = now();
             DB::table('users')->where('id', $user)->update($data);
         } else {
+            $data['created_at'] = now();
             $data['updated_at'] = now();
             DB::table('users')->where('id', $user)->update($data);
         }
